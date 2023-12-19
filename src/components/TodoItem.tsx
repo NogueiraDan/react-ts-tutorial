@@ -1,58 +1,58 @@
-import { useEffect, useRef, useState } from 'react'
-import { Todo } from '../context/TodoContext'
-import { useTodo } from '../context/useTodo'
-import { Input } from './Input'
-import { BsCheck2Square } from 'react-icons/bs'
-import { TbRefresh } from 'react-icons/tb'
-import { FaRegEdit } from 'react-icons/fa'
-import { RiDeleteBin7Line } from 'react-icons/ri'
-import { toast } from 'react-hot-toast'
-import cn from 'classnames'
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react';
+import { Todo } from '../context/TodoContext';
+import { useTodo } from '../context/useTodo';
+import { Input } from './Input';
+import { BsCheck2Square } from 'react-icons/bs';
+import { TbRefresh } from 'react-icons/tb';
+import { FaRegEdit } from 'react-icons/fa';
+import { RiDeleteBin7Line } from 'react-icons/ri';
+import { toast } from 'react-hot-toast';
+import cn from 'classnames';
+import { motion } from 'framer-motion';
 
 export const TodoItem = (props: { todo: Todo }) => {
-  const { todo } = props
+  const { todo } = props;
 
-  const [editingTodoText, setEditingTodoText] = useState<string>('')
-  const [editingTodoId, setEditingTodoId] = useState<string | null>(null)
-  const { deleteTodo, editTodo, updateTodoStatus } = useTodo()
-  const editInputRef = useRef<HTMLInputElement>(null)
+  const [editingTodoText, setEditingTodoText] = useState<string>('');
+  const [editingTodoId, setEditingTodoId] = useState<string | null>(null);
+  const { deleteTodo, editTodo, updateTodoStatus } = useTodo();
+  const editInputRef = useRef<HTMLInputElement>(null);
 
   // Focando no input ao editar
   useEffect(() => {
     if (editingTodoId !== null && editInputRef.current) {
-      editInputRef.current.focus()
+      editInputRef.current.focus();
     }
-  }, [editingTodoId])
+  }, [editingTodoId]);
 
   const handleEdit = (todoId: string, todoText: string) => {
-    setEditingTodoId(todoId)
-    setEditingTodoText(todoText)
+    setEditingTodoId(todoId);
+    setEditingTodoText(todoText);
     if (editInputRef.current) {
-      editInputRef.current.focus()
+      editInputRef.current.focus();
     }
-  }
+  };
 
   const handleUpdate = (todoId: string) => {
     if (editingTodoText.trim() !== '') {
-      editTodo(todoId, editingTodoText)
-      setEditingTodoId(null)
-      setEditingTodoText('')
-      toast.success('Tarefa atualizada com sucesso!')
+      editTodo(todoId, editingTodoText);
+      setEditingTodoId(null);
+      setEditingTodoText('');
+      toast.success('Tarefa atualizada com sucesso!');
     } else {
-      toast.error('Tarefa não pode ser vazia!')
+      toast.error('Tarefa não pode ser vazia!');
     }
-  }
+  };
 
   const handleDelete = (todoId: string) => {
-    deleteTodo(todoId)
-    toast.success('Tarefa deletada com sucesso!')
-  }
+    deleteTodo(todoId);
+    toast.success('Tarefa deletada com sucesso!');
+  };
 
   const handleStatusUpdate = (todoId: string) => {
-    updateTodoStatus(todoId)
-    toast.success('Status atualizado!')
-  }
+    updateTodoStatus(todoId);
+    toast.success('Status atualizado!');
+  };
 
   return (
     <motion.li
@@ -123,5 +123,5 @@ export const TodoItem = (props: { todo: Todo }) => {
         </div>
       )}
     </motion.li>
-  )
-}
+  );
+};

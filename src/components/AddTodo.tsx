@@ -1,29 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { toast } from 'react-hot-toast'
-import { useTodo } from '../context/useTodo'
-import { Input } from './Input'
+import React, { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { useTodo } from '../context/useTodo';
+import { Input } from './Input';
 
 export const AddTodo = () => {
-  const [input, setInput] = useState<string>('')
-  const inputRef = useRef<HTMLInputElement>(null)
-  const { addTodo } = useTodo()
+  const [input, setInput] = useState<string>('');
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { addTodo } = useTodo();
 
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.focus()
+      inputRef.current.focus();
     }
-  }, [])
+  }, []);
 
   const handleSubmission = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (input.trim() !== '') {
-      addTodo(input)
-      setInput('')
-      toast.success('Tarefa inserida com sucesso!')
+      addTodo(input);
+      setInput('');
+      toast.success('Tarefa inserida com sucesso!');
     } else {
-      toast.error('A tarefa não pode ser vazia!')
+      toast.error('A tarefa não pode ser vazia!');
     }
-  }
+  };
 
   return (
     <>
@@ -45,5 +45,5 @@ export const AddTodo = () => {
         </div>
       </form>
     </>
-  )
-}
+  );
+};

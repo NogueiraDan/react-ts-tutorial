@@ -1,10 +1,10 @@
-import { TodoItem } from './TodoItem'
-import { useTodo } from '../context/useTodo'
-import { SiStarship } from 'react-icons/si'
-import { motion } from 'framer-motion'
+import { TodoItem } from './TodoItem';
+import { useTodo } from '../context/useTodo';
+import { SiStarship } from 'react-icons/si';
+import { motion } from 'framer-motion';
 
 export const TodoList = () => {
-  const { todos } = useTodo()
+  const { todos } = useTodo();
 
   if (!todos.length) {
     return (
@@ -14,7 +14,7 @@ export const TodoList = () => {
           You have nothing to do!
         </h1>
       </div>
-    )
+    );
   }
 
   return (
@@ -23,5 +23,5 @@ export const TodoList = () => {
         <TodoItem todo={todo} key={todo.id} />
       ))}
     </motion.ul>
-  )
-}
+  );
+};
