@@ -24,7 +24,7 @@ jobs:
       - name: Tests
         run: 'npm run ci:test'
   cd:
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main'
     needs: ci
     runs-on: ubuntu-latest
     steps:
@@ -33,6 +33,6 @@ jobs:
       - name: Merge to main
         run: |
           git fetch origin ${{ github.event.pull_request.head.ref }}
-          git checkout main
+          git checkout ${{ github.event.pull_request.base.ref }}
           git merge --no-ff ${{ github.event.pull_request.head.ref }} --no-edit
-          git push -u origin main
+          git push -u origin ${{ github.event.pull_request.base.ref }}
