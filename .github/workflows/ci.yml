@@ -23,16 +23,16 @@ jobs:
         run: npm run lint
       - name: Tests
         run: 'npm run ci:test'
-  # cd:
-  #   if: github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main'
-  #   needs: ci
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #     - name: Merge to main
-  #       run: |
-  #         git fetch origin ${{ github.event.pull_request.head.ref }}
-  #         git checkout ${{ github.event.pull_request.base.ref }}
-  #         git merge --no-ff ${{ github.event.pull_request.head.ref }} --no-edit
-  #         git push -u origin ${{ github.event.pull_request.base.ref }}
+  cd:
+    if: github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main'
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Merge to main
+        run:
+          git pull origin ${{ github.event.pull_request.head.ref }}
+          git checkout ${{ github.event.pull_request.base.ref }}
+          git merge --no-ff ${{ github.event.pull_request.head.ref }} --no-edit
+          git push -u origin ${{ github.event.pull_request.base.ref }}
