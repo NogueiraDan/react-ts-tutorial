@@ -1,5 +1,5 @@
-describe('Jest', () => {
-  it('should return true', () => {
-    expect(1).toBeTruthy();
-  });
+describe("Jest", ()=>{
+    it("should return initial test", ()=>{
+        expect(1).toBeTruthy();
+    });
 });
